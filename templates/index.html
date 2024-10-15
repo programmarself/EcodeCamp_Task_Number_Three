@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+</head>
+<body>
+    <h1>Welcome to the Quiz Game!</h1>
+
+    {% if score is not none %}
+        <h2>Your score: {{ score }}/{{ questions | length }}</h2>
+    {% endif %}
+
+    <form action="/" method="POST">
+        {% for question in questions %}
+            <div class="question">
+                <h3>{{ question["question"] }}</h3>
+                <ul>
+                    {% for option in question["options"] %}
+                        <li>
+                            <input type="radio" name="answer{{ loop.index }}" value="{{ option[0] }}" required>
+                            {{ option }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>
